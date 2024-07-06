@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Dash\CategoryController;
 use App\Http\Controllers\Dash\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
@@ -32,8 +33,8 @@ Route::group(
                 })->name('main');  
                 
                 Route::resources([
-                    'users'=>UserController::class, 
-
+                    'users'=>UserController::class,
+                    'categories' => CategoryController::class, 
                 ]);
         });
         Route::middleware('auth')->group(function () {
