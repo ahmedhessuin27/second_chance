@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Dash\CategoryController;
 use App\Http\Controllers\Dash\UserController;
+use App\Http\Controllers\HomePageController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -23,9 +25,7 @@ Route::group(
         'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
     ],
     function () {
-        Route::get('/', function () {
-            return view('front.index');
-        })->name('main');
+        Route::get('/', [HomePageController::class , 'index'])->name('main');
         
         Route::middleware(['auth', 'verified', 'dashboardAccess'])->as('dashboard.')->prefix('dashboard')->group(function(){
                 Route::get('/', function () {
@@ -34,7 +34,9 @@ Route::group(
                 
                 Route::resources([
                     'users'=>UserController::class,
-                    'categories' => CategoryController::class, 
+                    'categories' => CategoryController::class,
+                    'products' => ProductController::class, 
+
                 ]);
         });
         Route::middleware('auth')->group(function () {

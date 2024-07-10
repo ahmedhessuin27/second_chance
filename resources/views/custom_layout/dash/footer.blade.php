@@ -67,6 +67,7 @@
     <script src="{{ asset('dash/vendors/owl.carousel/dist/owl.carousel.min.js')}}"></script>
 	
 	<!-- Toastr JS -->
+    @stack('scripts')
     <script src="{{ asset('dash/vendors/jquery-toast-plugin/dist/jquery.toast.min.js')}}"></script>
     
     <!-- Init JavaScript -->

@@ -163,7 +163,7 @@ License: You must have a valid license purchased only from templatemonster to le
                         </div>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" data-dropdown-in="flipInX" data-dropdown-out="flipOutX">
-                        <a class="dropdown-item" href="profile.html"><i class="dropdown-icon zmdi zmdi-account"></i><span>Profile</span></a>
+                        <a class="dropdown-item" href="{{ route('dashboard.products.index') }}"><i class="dropdown-icon zmdi zmdi-account"></i><span>Products</span></a>
                         <a class="dropdown-item" href="{{ route('main') }}"><i class="dropdown-icon zmdi zmdi-card"></i><span>Mainpage</span></a>
                         <a class="dropdown-item" href="{{ route('dashboard.categories.index') }}"><i class="dropdown-icon zmdi zmdi-email"></i><span>Categories</span></a>
                         <a class="dropdown-item" href="{{ route('dashboard.users.index') }}"><i class="dropdown-icon zmdi zmdi-settings"></i><span>Users</span></a>

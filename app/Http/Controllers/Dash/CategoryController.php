@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Dash;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
@@ -23,6 +25,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
+
         return view('dash.categories.add');
         
     }
@@ -64,7 +67,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('dash.categories.edit');
     }
 
     /**
@@ -72,7 +75,24 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $request->validate([
+            'name' => 'required|unique:categories,name,'. $category->id,
+            'sub_title' => 'required|unique:categories,sub_title,' . $category->id,
+            'category_image' => 'image|mimes:png,jpg',
+        ]);
+        $requested_data = $request->except('category_image');
+        if ($request->file('category_image')) {
+
+            $imagename = uniqid() . $request->file('category_image')->getClientOriginalName();
+            Image::make($request->file('category_image'))->resize(442, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save(public_path('uploads/category/' . $imagename));
+            Storage::disk('public_uploads')->delete("/category/$category->category_image");
+
+            $requested_data['category_image'] = $imagename;
+        }
+        $category->update($requested_data);
+        return to_route('dashboard.categories.index');
     }
 
     /**
@@ -80,6 +100,9 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        unlink(public_path('uploads/category/'. $category->category_image ));
+        $category->delete();
+        return to_route('dashboard.categories.index');
+
     }
 }
