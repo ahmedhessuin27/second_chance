@@ -138,7 +138,7 @@
                                             </li>
                                             <li><a href="index.htm" class="nav-link menu-title">{{ __('main.home') }}</a></li>
                                             <li><a href="shop.html" class="nav-link menu-title">{{ __('main.shop') }}</a></li>
-                                            <li><a href="cart/list.html" class="nav-link menu-title">Cart</a></li>
+                                            <li><a href="{{ route('carts.index') }}" class="nav-link menu-title">Cart</a></li>
                                             <li><a href="about-us.html" class="nav-link menu-title">{{ __('main.about_us') }}</a></li>
                                             <li><a href="contact-us.html" class="nav-link menu-title">{{ __('main.contact_us') }}</a>
                                             </li>
@@ -156,7 +156,7 @@
                                     </li>
                                     <li class="onhover-dropdown wislist-dropdown">
                                         <div class="cart-media">
-                                            <a href="wishlist/list.html">
+                                            <a href="{{ route('carts.index') }}">
                                                 <i data-feather="heart"></i>
                                                 <span id="wishlist-count" class="label label-theme rounded-pill">
                                                     0
@@ -166,7 +166,7 @@
                                     </li>
                                     <li class="onhover-dropdown wislist-dropdown">
                                         <div class="cart-media">
-                                            <a href="cart/list.html">
+                                            <a href="{{ route('carts.index') }}">
                                                 <i data-feather="shopping-cart"></i>
                                                 <span id="cart-count" class="label label-theme rounded-pill">
                                                     0

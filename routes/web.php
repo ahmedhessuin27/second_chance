@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\Dash\CategoryController;
 use App\Http\Controllers\Dash\UserController;
 use App\Http\Controllers\HomePageController;
@@ -26,16 +27,22 @@ Route::group(
     ],
     function () {
         Route::get('/', [HomePageController::class , 'index'])->name('main');
+        Route::resources([
+
+            'carts' => CartController::class,
+
+        ]); 
         
         Route::middleware(['auth', 'verified', 'dashboardAccess'])->as('dashboard.')->prefix('dashboard')->group(function(){
                 Route::get('/', function () {
                     return view('dash.index');
-                })->name('main');  
+                })->name('main'); 
+            
                 
                 Route::resources([
                     'users'=>UserController::class,
                     'categories' => CategoryController::class,
-                    'products' => ProductController::class, 
+                    'products' => ProductController::class,
 
                 ]);
         });
